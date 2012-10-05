@@ -17,9 +17,12 @@ class Users extends CI_Controller {
 		if ($this->form_validation->run() == FALSE)
 		{
 			$this->load->view('register_form');
+			$this->load->view('middle');
 		}
 		else
 		{
+			$this->load->view('user_panel');
+			$this->load->view('middle');
 			$this->load->database();
 			$this->load->model('users_db');
 			

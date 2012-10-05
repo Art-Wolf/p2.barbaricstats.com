@@ -1,5 +1,5 @@
-	<footer>
-		<p>John Doyle, CSCI E-75</p>
-	</footer>
-</body>
+				</div>
+		 	</div>
+		</div>
+	</body>
 </html>
