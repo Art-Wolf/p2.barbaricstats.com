@@ -8,7 +8,7 @@ class Users extends CI_Controller {
                 $this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
 
-		if ($this->session->userdata('user_name')) {
+		if (! is_null($this->session->userdata('user_name'))) {
 			$this->load->view('user_panel');
 			$this->load->view('middle');
                         $this->load->view('user_main');
