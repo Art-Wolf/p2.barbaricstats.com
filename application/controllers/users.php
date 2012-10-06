@@ -1,10 +1,17 @@
 <?php
 
 class Users extends CI_Controller {
+	function logout()
+	{
+		$this->session->unset_userdata('user_name');
+		$this->load->view('register_form');
+		$this->load->view('middle');
+		$this->load->view('footer');
+	}
+
                
 	function index()
 	{			
-		$this->load->library('session');
                 $this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
 

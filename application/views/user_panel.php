@@ -9,6 +9,6 @@
     <li class="divider"></li>
     <li><a href="#"><i class="icon-pencil"></i> Post</a></li>
     <li class="divider"></li>
-    <li><a href="#"><i class="i icon-stop"></i> Logout</a></li>
+    <li><a href="/users/logout"><i class="i icon-stop"></i> Logout</a></li>
   </ul>
 </div>
