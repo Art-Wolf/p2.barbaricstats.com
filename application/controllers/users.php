@@ -51,13 +51,12 @@ class Users extends CI_Controller {
 				if ($this->users_db->Register($form_data) == TRUE) 
 				{
 
-					$this->session->set_userdata('user_name', $this->form_validation->user_name);
+					$this->session->set_userdata('user_name', set_value('user_name'));
 
 					$this->load->library('email');
 	
-					$this->email->initialize($config);
 					$this->email->from('admin@barbaricstats.com', 'Admin');
-					$this->email->to($this->form_validation->email_address);
+					$this->email->to(set_value('email_address'));
 
 					$this->email->subject('Barbaric Stats - Registrtaion');
 	
