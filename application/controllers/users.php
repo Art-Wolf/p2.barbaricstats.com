@@ -4,8 +4,10 @@ class Users extends CI_Controller {
 	function logout()
 	{
 		$this->session->unset_userdata('user_name');
+		$this->load->view('header');
 		$this->load->view('register_form');
 		$this->load->view('middle');
+		$this->load->view('logout');
 		$this->load->view('footer');
 	}
 
@@ -15,7 +17,9 @@ class Users extends CI_Controller {
                 $this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
 
-		if (! is_null($this->session->userdata('user_name'))) {
+		$this->load->view('header');
+
+		if ($this->session->userdata('user_name')) {
 			$this->load->view('user_panel');
 			$this->load->view('middle');
                         $this->load->view('user_main');
@@ -26,8 +30,6 @@ class Users extends CI_Controller {
 			$this->form_validation->set_rules('email_address', 'Email Address', 'required|xss_clean|valid_email|max_length[255]');			
 			$this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
 
-			$this->load->view('header');
-			
 			if ($this->form_validation->run() == FALSE)
 			{
 				$this->load->view('register_form');
@@ -52,14 +54,6 @@ class Users extends CI_Controller {
 					$this->session->set_userdata('user_name', $this->form_validation->user_name);
 
 					$this->load->library('email');
-	
-					$config['protocol'] = 'sendmail';
-					$config['mailpath'] = '/usr/sbin/sendmail';
-					$config['charset'] = 'iso-8859-1';
-					$config['wordwrap'] = TRUE;
-					$config['smtp_host'] = 'smtp.gmail.com';
-					$config['smtp_user'] = 'admin@barbaricstats.com';
-					$config['smtp_pass'] = 'b0stonbrewin';
 	
 					$this->email->initialize($config);
 					$this->email->from('admin@barbaricstats.com', 'Admin');
