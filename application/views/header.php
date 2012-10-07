@@ -9,11 +9,11 @@
 	<meta name="robots" content="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
+	<link href="/css/bootstrap-responsive.css" rel="stylesheet">
 
-	<script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="/js/jquery-1.8.2.min.js" type="text/javascript"></script>
+	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 	<title>Barbaicstats!</title>
 </head>
 <body>
