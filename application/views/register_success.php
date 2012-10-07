@@ -4,5 +4,7 @@ $attributes = array('class' => '', 'id' => '');
 
 ?>
 
-<p>Welcome back <?php echo $this->session->userdata('user_name'); ?></p>
+<h1>Registered Successfully</h1>
+
+<p>Congrats <?php echo $this->session->userdata('user_name'); ?> for registering.</p>
 

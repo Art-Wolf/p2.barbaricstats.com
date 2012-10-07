@@ -3,7 +3,8 @@
 class Users extends CI_Controller {
 	function logout()
 	{
-		$this->session->unset_userdata('user_name');
+//		$this->session->unset_userdata('user_name');
+
 		$this->load->view('header');
 		$this->load->view('register_form');
 		$this->load->view('middle');
