@@ -4,11 +4,7 @@ $attributes = array('class' => '', 'id' => '');
 
 ?>
 
-<h1>Logged In</h1>
-
-<p>Welcome back <?php echo $this->session->userdata('user_name'); ?>.</p>
-
-<h2>Personal Feed</h2>
+<h1>Latest Public Posts</h1>
 
 <?php
 
