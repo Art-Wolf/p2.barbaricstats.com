@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="johndoyle (generated)" id="1349842061614-1">
+        <createTable tableName="ci_sessions">
+            <column defaultValue="0" name="session_id" type="VARCHAR(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="0" name="ip_address" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_agent" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="last_activity" type="INT(10) UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_data" type="TEXT(65535)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-2">
+        <createTable tableName="posts">
+            <column name="id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="VARCHAR(140)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="insert_tmstmp" type="TIMESTAMP(19)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-3">
+        <createTable tableName="users">
+            <column name="id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_name" type="VARCHAR(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-4">
+        <addPrimaryKey columnNames="session_id" tableName="ci_sessions"/>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-5">
+        <addPrimaryKey columnNames="id" tableName="posts"/>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-6">
+        <addPrimaryKey columnNames="id" tableName="users"/>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-7">
+        <insert tableName="ci_sessions">
+            <column name="session_id" value="3b3b01588bd72189a5434bdb775a6352"/>
+            <column name="ip_address" value="::1"/>
+            <column name="user_agent" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"/>
+            <column name="last_activity" valueNumeric="1349759005"/>
+            <column name="user_data" value=""/>
+        </insert>
+        <insert tableName="ci_sessions">
+            <column name="session_id" value="b646d8d551ebd29e6e52cc4f2792e12d"/>
+            <column name="ip_address" value="127.0.0.1"/>
+            <column name="user_agent" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1229.79 Safari/537.4"/>
+            <column name="last_activity" valueNumeric="1349758892"/>
+            <column name="user_data" value="a:1:{s:9:&quot;user_data&quot;;s:0:&quot;&quot;;}"/>
+        </insert>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-8">
+        <insert tableName="posts">
+            <column name="id" valueNumeric="1"/>
+            <column name="user_name" value="John Doyle"/>
+            <column name="message" value="Testing a new message"/>
+            <column name="insert_tmstmp" valueDate="2012-10-08T23:48:10.0"/>
+        </insert>
+        <insert tableName="posts">
+            <column name="id" valueNumeric="2"/>
+            <column name="user_name" value="John Doyle"/>
+            <column name="message" value="Another test message."/>
+            <column name="insert_tmstmp" valueDate="2012-10-09T00:06:36.0"/>
+        </insert>
+        <insert tableName="posts">
+            <column name="id" valueNumeric="3"/>
+            <column name="user_name" value="John Doyle"/>
+            <column name="message" value="Testing another message!"/>
+            <column name="insert_tmstmp" valueDate="2012-10-09T01:02:48.0"/>
+        </insert>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-9">
+        <createIndex indexName="last_activity_idx" tableName="ci_sessions" unique="false">
+            <column name="last_activity"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-10">
+        <createIndex indexName="user_id" tableName="posts" unique="false">
+            <column name="user_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-11">
+        <createIndex indexName="user_name" tableName="users" unique="false">
+            <column name="user_name"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="johndoyle (generated)" id="1349842061614-12">
+        <createIndex indexName="user_name_2" tableName="users" unique="true">
+            <column name="user_name"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
