@@ -8,12 +8,14 @@ $attributes = array('class' => '', 'id' => '');
 
 <?php
 
+$posts = array_reverse($posts);
+
 foreach ($posts as $msg) :
 
 ?>
 	<blockquote>
 		<p><?php echo $msg->message; ?></p>
-		<small><?php echo $msg->user_name; ?> </small>
+		<small><?php echo $msg->user_name; ?> - <?php echo $msg->insert_tmstmp; ?></small>
 	</blockquote>
 <?php
 
