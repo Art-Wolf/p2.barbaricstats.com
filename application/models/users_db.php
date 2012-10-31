@@ -23,5 +23,9 @@ class Users_db extends CI_Model {
 
                 return FALSE;
 	}
+
+	function Get_list() {
+		return $this->db->get('users')->result();
+	}
 }
 ?>
