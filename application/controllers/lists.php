@@ -16,7 +16,12 @@ class Lists extends CI_Controller {
                 	$this->load->database();
                 	$this->load->model('users_db');
 
-                	$data['users'] = $this->users_db->get_list();
+			$form_data = array( 'user_name' => $this->session->userdata('user_name') );
+                        $row = $this->users_db->Get_id($form_data);
+
+                        $form_data = array('follows.user_id' => $row->id);
+
+                	$data['users'] = $this->users_db->get_list($form_data);
 
                 	$this->load->view('user_list', $data);
 		}

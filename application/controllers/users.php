@@ -170,9 +170,84 @@ class Users extends CI_Controller {
 
                 $data['posts'] = $this->posts_db->get_user_posts($form_data);
 
-                $this->load->view('user_posts', $data);
+                $this->load->model('users_db');
+
+                $form_data = array('follows.user_id' => $user_id);
+                $data['follows'] = $this->users_db->get_following_list($form_data);
+
+                $this->load->view('user_follows', $data);
+
+		$this->load->view('user_posts', $data);
+                $this->load->view('footer');
+	}
+
+	function unfollow($user_id) {
+                $this->load->helper(array('form','url'));
+                $this->load->library('form_validation');
+
+                $this->load->view('header');
+
+                if ($this->session->userdata('user_name') == null) {
+                        $this->load->view('navigation_form');
+                }
+                else {
+                        $this->load->view('user_panel');
+
+                        $this->load->view('middle');
+                        $this->load->database();
+
+                        $this->load->model('users_db');
+
+                        $form_data = array( 'user_name' => $this->session->userdata('user_name') );
+                        $row = $this->users_db->Get_id($form_data);
+
+                        $form_data = array('user_id' => $row->id, 'followed_id' => $user_id);
+
+                        $this->users_db->stop_following($form_data);
+
+                        $form_data = array('follows.user_id' => $row->id);
+
+                        $data['follows'] = $this->users_db->get_following_list($form_data);
+
+                        $this->load->view('user_follows', $data);
+                }
+
+                $this->load->view('footer');
+        }
+
+	function follow($user_id) {
+                $this->load->helper(array('form','url'));
+                $this->load->library('form_validation');
+
+                $this->load->view('header');
+
+                if ($this->session->userdata('user_name') == null) {
+                        $this->load->view('navigation_form');
+                }
+                else {
+                        $this->load->view('user_panel');
+
+       		        $this->load->view('middle');
+        	        $this->load->database();
+                	 
+			$this->load->model('users_db');
+
+			$form_data = array( 'user_name' => $this->session->userdata('user_name') );
+			$row = $this->users_db->Get_id($form_data);
+
+                	$form_data = array('user_id' => $row->id, 'followed_id' => $user_id);
+
+			$this->users_db->start_following($form_data);
+
+			$form_data = array('follows.user_id' => $row->id);
+
+                	$data['follows'] = $this->users_db->get_following_list($form_data);
+
+	                $this->load->view('user_follows', $data);
+		}
 
                 $this->load->view('footer');
 	}
+
 }
 ?>

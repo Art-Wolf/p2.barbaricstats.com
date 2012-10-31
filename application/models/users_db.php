@@ -30,8 +30,14 @@ class Users_db extends CI_Model {
                 return FALSE;
 	}
 
-	function Get_list() {
-		return $this->db->get('users')->result();
+	function Get_list($form_data) {
+		$this->db->select('users.id, users.user_name, follows.followed_id');
+                $this->db->from('users');
+                $this->db->join('follows', 'follows.followed_id = users.id AND ' . implode(' AND ',$form_data), 'left outer');
+		$this->db->where('users.id <> ' . $form_data['follows.user_id']);
+
+                return $this->db->get()->result();
+
 	}
 
 	function Get_id($form_data) {
@@ -40,6 +46,36 @@ class Users_db extends CI_Model {
 		$this->db->where($form_data);
 
 		return $this->db->get()->row();
+	}
+
+	function Start_following($form_data) {
+		$this->db->insert('follows', $form_data);
+
+		if ($this->db->affected_rows() == '1') {
+                        return TRUE;
+                }
+
+                return FALSE;
+	}
+
+	function Stop_following($form_data) {
+                $this->db->delete('follows', $form_data);
+
+                if ($this->db->affected_rows() == '1') {
+                        return TRUE;
+                }
+
+                return FALSE;
+        }
+
+	function Get_following_list($form_data) {
+
+		$this->db->select('users.id, users.user_name');
+                $this->db->from('users');
+                $this->db->join('follows', 'follows.followed_id = users.id');
+                $this->db->where($form_data);
+
+                return $this->db->get()->result();
 	}
 }
 ?>
