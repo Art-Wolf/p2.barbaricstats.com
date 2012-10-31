@@ -8,6 +8,7 @@
     <li><a href="#"><i class="icon-trash"></i> Delete Account</a></li>
     <li class="divider"></li>
     <li><a href="/posts"><i class="icon-pencil"></i> Post</a></li>
+    <li><a href="/lists"><i class="icon-list"></i> User List</a><li>
     <li class="divider"></li>
     <li><a href="/users/logout"><i class="i icon-stop"></i> Logout</a></li>
   </ul>

@@ -12,7 +12,7 @@ $attributes = array('class' => '', 'id' => '');
 foreach ($users as $user) :
 
 ?>
-	<li><a href=""><?php echo $user->user_name; ?></a></li>
+	<li><a href="/users/display/<?php echo $user->id; ?>"><?php echo $user->user_name; ?></a></li>
 <?php
 
 endforeach;

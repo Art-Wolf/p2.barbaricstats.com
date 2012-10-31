@@ -33,5 +33,13 @@ class Users_db extends CI_Model {
 	function Get_list() {
 		return $this->db->get('users')->result();
 	}
+
+	function Get_id($form_data) {
+		$this->db->select('id');
+		$this->db->from('users');
+		$this->db->where($form_data);
+
+		return $this->db->get()->row();
+	}
 }
 ?>

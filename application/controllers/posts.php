@@ -19,10 +19,16 @@ class Posts extends CI_Controller {
                         	$this->load->view('post_form');
 			} else {
 				$this->load->database();
+				$this->load->model('users_db');
+
+				$form_data = array( 'user_name' => $this->session->userdata('user_name') );
+
+				$row = $this->users_db->Get_id($form_data);
+
 				$this->load->model('posts_db');
 
 				$form_data = array(
-                                                        'user_name' => $this->session->userdata('user_name'),
+                                                        'user_id' => $row->id,
                                                         'message' => set_value('message')
                                                         );
 

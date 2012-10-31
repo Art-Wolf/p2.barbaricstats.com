@@ -3,7 +3,20 @@
 class Posts_db extends CI_Model {
 
 	function Get_posts() {
-		return $this->db->get('posts')->result();
+		$this->db->select('users.user_name, posts.message, posts.insert_tmstmp');
+                $this->db->from('posts');
+                $this->db->join('users', 'posts.user_id = users.id');
+
+		return $this->db->get()->result();
+	}
+
+	function Get_user_posts($form_data) {
+		$this->db->select('users.user_name, posts.message, posts.insert_tmstmp');
+		$this->db->from('posts');
+		$this->db->join('users', 'posts.user_id = users.id');
+		$this->db->where($form_data);
+
+		return $this->db->get()->result();
 	}
 
 	function Post($form_data)

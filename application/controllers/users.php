@@ -148,5 +148,31 @@ class Users extends CI_Controller {
 
 		$this->load->view('footer');
 	}
+
+	function display($user_id) {
+                $this->load->helper(array('form','url'));
+                $this->load->library('form_validation');
+
+                $this->load->view('header');
+
+                if ($this->session->userdata('user_name')) {
+                        $this->load->view('user_panel');
+                }
+                else {
+                        $this->load->view('navigation_form');
+                }
+
+		$this->load->view('middle');
+                $this->load->database();
+                $this->load->model('posts_db');
+
+		$form_data = array('user_id' => $user_id);
+
+                $data['posts'] = $this->posts_db->get_user_posts($form_data);
+
+                $this->load->view('user_posts', $data);
+
+                $this->load->view('footer');
+	}
 }
 ?>
