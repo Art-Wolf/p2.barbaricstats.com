@@ -13,12 +13,18 @@ class Users_db extends CI_Model {
 	}
 
 	function Signin($form_data) {
-		$sql = "SELECT COUNT(*) FROM users WHERE user_name = ? AND password = ?";
+		$this->db->escape($form_data);
+
+		$sql = "SELECT COUNT(*) AS CNT FROM users WHERE user_name = ? AND password = ?";
 
 		$query = $this->db->query($sql, $form_data);
 
-		if ($query->num_rows() > 0) {
-                        return TRUE;
+		if ($query->num_rows() == 1) {
+			$row = $query->row_array();
+
+			if ($row['CNT'] > 0) {
+                        	return TRUE;
+			}
                 }
 
                 return FALSE;

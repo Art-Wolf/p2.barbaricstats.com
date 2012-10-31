@@ -86,8 +86,6 @@ class Users extends CI_Controller {
 			$this->load->view('signin_form');
 			$this->load->view('middle');
                 } else {
-                        $this->load->view('user_panel');
-                        $this->load->view('middle');
                         $this->load->database();
                         $this->load->model('users_db');
 
@@ -98,8 +96,12 @@ class Users extends CI_Controller {
 
 			if ($this->users_db->Signin($form_data) == TRUE) {
 				$this->session->set_userdata('user_name', set_value('user_name'));
+                        	$this->load->view('user_panel');
+                        	$this->load->view('middle');
 				$this->load->view('signin_success');
 			} else {
+                        	$this->load->view('signin_form');
+                        	$this->load->view('middle');
 				$this->load->view('signin_failure');
 			}
 		}
