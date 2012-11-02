@@ -3,7 +3,7 @@
 class Posts_db extends CI_Model {
 
 	function Get_posts() {
-		$this->db->select('users.user_name, posts.message, posts.insert_tmstmp');
+		$this->db->select('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp');
                 $this->db->from('posts');
                 $this->db->join('users', 'posts.user_id = users.id');
 
@@ -30,5 +30,28 @@ class Posts_db extends CI_Model {
 		
 		return FALSE;
 	}
+
+	function Edit_post($form_data) {
+		$this->db->update('posts', $form_data);
+
+                if ($this->db->affected_rows() == '1')
+                {
+                        return TRUE;
+                }
+
+                return FALSE;
+	}
+
+	function Delete_post($form_data) {
+                $this->db->delete('posts', $form_data);
+
+                if ($this->db->affected_rows() == '1')
+                {
+                        return TRUE;
+                }
+
+                return FALSE;
+        }
+
 }
 ?>
