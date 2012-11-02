@@ -9,8 +9,6 @@ class Users extends CI_Controller {
                 $this->load->library('form_validation');
 
 		$this->load->view('header');
-		$this->load->view('navigation_form');
-		$this->load->view('middle');
 		$this->load->view('logout');
 		$this->load->view('footer');
 	}
@@ -123,9 +121,6 @@ class Users extends CI_Controller {
 		$this->load->view('header');
 
 		if ($this->session->userdata('user_name')) {
-			$this->load->view('user_panel');
-			$this->load->view('middle');
-
 			$this->load->database();
 			$this->load->model('posts_db');
 
@@ -134,10 +129,6 @@ class Users extends CI_Controller {
                         $this->load->view('user_main', $data);
 		}
 		else {
-
-			$this->load->view('navigation_form');
-			$this->load->view('middle');
-
                         $this->load->database();
                         $this->load->model('posts_db');
 
@@ -155,14 +146,6 @@ class Users extends CI_Controller {
 
                 $this->load->view('header');
 
-                if ($this->session->userdata('user_name')) {
-                        $this->load->view('user_panel');
-                }
-                else {
-                        $this->load->view('navigation_form');
-                }
-
-		$this->load->view('middle');
                 $this->load->database();
                 $this->load->model('posts_db');
 
@@ -187,13 +170,7 @@ class Users extends CI_Controller {
 
                 $this->load->view('header');
 
-                if ($this->session->userdata('user_name') == null) {
-                        $this->load->view('navigation_form');
-                }
-                else {
-                        $this->load->view('user_panel');
-
-                        $this->load->view('middle');
+                if ($this->session->userdata('user_name')) {
                         $this->load->database();
 
                         $this->load->model('users_db');
@@ -221,13 +198,7 @@ class Users extends CI_Controller {
 
                 $this->load->view('header');
 
-                if ($this->session->userdata('user_name') == null) {
-                        $this->load->view('navigation_form');
-                }
-                else {
-                        $this->load->view('user_panel');
-
-       		        $this->load->view('middle');
+                if ($this->session->userdata('user_name')) {
         	        $this->load->database();
                 	 
 			$this->load->model('users_db');
