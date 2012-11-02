@@ -50,7 +50,7 @@
 					<input type="text" class="search-query span2" placeholder="Search">
 				</form>
 				<ul class="nav pull-right">
-				<?php if($this->session->userdata('user_name')) { ?>
+				<?php if(!$this->session->userdata('user_name')) { ?>
 					<li><a href="/users/signin">Signin</a></li>
 					<li class="divider-vertical"></li>
 					<li><a href="/users/register">Register</a></li>

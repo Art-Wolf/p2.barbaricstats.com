@@ -25,10 +25,7 @@ class Users extends CI_Controller {
 
                 if ($this->form_validation->run() == FALSE) {
 			$this->load->view('register_form');
-			$this->load->view('middle');
                 } else {
-			$this->load->view('user_panel');
-                        $this->load->view('middle');
                         $this->load->database();
                         $this->load->model('users_db');
 
@@ -61,13 +58,6 @@ class Users extends CI_Controller {
                         }
 		}
 
-                $this->load->database();
-                $this->load->model('posts_db');
-
-                $data['posts'] = $this->posts_db->get_posts();
-
-                $this->load->view('public_main', $data);
-
 		$this->load->view('footer');
 	}
                
@@ -80,11 +70,12 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('user_name', 'User Name', 'required|xss_clean|max_length[30]');
                 $this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
 
-		if ($this->form_validation->run() == FALSE) {
-			$this->load->view('signin_form');
-			$this->load->view('middle');
-                } else {
-                        $this->load->database();
+                $this->load->database();
+                $this->load->model('posts_db');
+
+                $data['posts'] = $this->posts_db->get_posts();
+
+		if ($this->form_validation->run() == TRUE) {
                         $this->load->model('users_db');
 
                         $form_data = array(
@@ -92,24 +83,18 @@ class Users extends CI_Controller {
                                                   'password' => set_value('password')
                                                    );
 
-			if ($this->users_db->Signin($form_data) == TRUE) {
+			if ($this->users_db->Signin($form_data)) {
 				$this->session->set_userdata('user_name', set_value('user_name'));
-                        	$this->load->view('user_panel');
-                        	$this->load->view('middle');
 				$this->load->view('signin_success');
+				$this->load->view('user_main');
 			} else {
-                        	$this->load->view('signin_form');
-                        	$this->load->view('middle');
 				$this->load->view('signin_failure');
+				$this->load->view('public_main', $data);
 			}
+		} else {
 		}
+			$this->load->view('signin_form');
 
-		$this->load->database();
-                $this->load->model('posts_db');
-
-                $data['posts'] = $this->posts_db->get_posts();
-
-                $this->load->view('public_main', $data);
 		$this->load->view('footer');
 	}
 
@@ -120,20 +105,15 @@ class Users extends CI_Controller {
 
 		$this->load->view('header');
 
+		$this->load->database();
+                $this->load->model('posts_db');
+
+                $data['posts'] = $this->posts_db->get_posts();
+
 		if ($this->session->userdata('user_name')) {
-			$this->load->database();
-			$this->load->model('posts_db');
-
-			$data['posts'] = $this->posts_db->get_posts();
-
                         $this->load->view('user_main', $data);
 		}
 		else {
-                        $this->load->database();
-                        $this->load->model('posts_db');
-
-                        $data['posts'] = $this->posts_db->get_posts();
-
                         $this->load->view('public_main', $data);
 		}
 
