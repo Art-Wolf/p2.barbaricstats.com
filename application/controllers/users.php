@@ -37,6 +37,10 @@ class Users extends CI_Controller {
 
                         if ($this->users_db->Register($form_data) == TRUE) {
                         	$this->session->set_userdata('user_name', set_value('user_name'));
+				$form_data = array( 'user_name' => $this->session->userdata('user_name') );
+                                $row = $this->users_db->Get_id($form_data);
+
+                                $this->session->set_userdata('user_id', $row->id);
 
                                 $this->load->library('email');
 
@@ -65,8 +69,6 @@ class Users extends CI_Controller {
 		$this->load->helper(array('form','url'));
 		$this->load->library('form_validation');
 
-		$this->load->view('header');
-
 		$this->form_validation->set_rules('user_name', 'User Name', 'required|xss_clean|max_length[30]');
                 $this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
 
@@ -83,17 +85,25 @@ class Users extends CI_Controller {
                                                   'password' => set_value('password')
                                                    );
 
-			if ($this->users_db->Signin($form_data)) {
+			if ($this->users_db->Signin($form_data) == TRUE) {
 				$this->session->set_userdata('user_name', set_value('user_name'));
+
+				$form_data = array( 'user_name' => set_value('user_name') );
+                        	$row = $this->users_db->Get_id($form_data);
+				$this->session->set_userdata('user_id', $row->id);
+
+				$this->load->view('header');
 				$this->load->view('signin_success');
-				$this->load->view('user_main');
+				$this->load->view('user_main', $data);
 			} else {
+				$this->load->view('header');
 				$this->load->view('signin_failure');
 				$this->load->view('public_main', $data);
 			}
 		} else {
-		}
+			$this->load->view('header');
 			$this->load->view('signin_form');
+		}
 
 		$this->load->view('footer');
 	}

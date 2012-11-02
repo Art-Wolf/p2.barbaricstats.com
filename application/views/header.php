@@ -31,20 +31,25 @@
 
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li class="active"><a href="#">Home</a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/lists">User List</a></li>
 					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
-					<li><a href="#">Link</a></li>
+					 <?php if($this->session->userdata('user_name')) { ?>
+                                        <li class="dropdown">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Post <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                        <li><a href="/posts/">New</a></li>
+                                                        <li><a href="/posts/history/">History</a></li>
+                                                </ul>
+                                        </li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">User Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Separated link</a></li>
+							<li><a href="/users/display/<?php echo $this->session->userdata('user_id'); ?>">View</a></li>
+							<li><a href="/users/edit/">Edit</a></li>
 						</ul>
 					</li>
+					<?php } ?>
 				</ul>
 				<form class="navbar-search pull-left" action="">
 					<input type="text" class="search-query span2" placeholder="Search">
@@ -66,7 +71,6 @@
 	<header class="jumbotron subhead" id="overview">
 		<div class="row">
 			<div class="span12">
-				<h1>Superhero</h1>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
@@ -87,7 +91,7 @@ $(function () {
                 x: -20 //center
             },
             subtitle: {
-                text: 'Internet Facts',
+                text: 'Internet Facts Are Important Facts',
                 x: -20
             },
             xAxis: {
