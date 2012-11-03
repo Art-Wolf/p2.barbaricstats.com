@@ -15,15 +15,16 @@ foreach ($users as $user) :
 	<li>
 		<a href="/users/display/<?php echo $user->id; ?>"><?php echo $user->user_name; ?></a>
 <?php
-
-if (!isset($user->followed_id)) {
+if ($this->session->userdata('user_name')) {
+	if (!isset($user->followed_id)) {
 ?>
 		<a href="/users/follow/<?php echo $user->id; ?>" class="btn btn-primary">Follow</a>
 <?php
-} else {
+	} else {
 ?>
 	        <a href="/users/unfollow/<?php echo $user->id; ?>" class="btn">Unfollow</a>
 <?php
+	}
 }
 ?>
 	</li>

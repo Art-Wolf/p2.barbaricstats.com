@@ -9,27 +9,21 @@ class Lists extends CI_Controller {
 
 		$this->load->view('header');
 
-		if ($this->session->userdata('user_name')) {
 
-                	$this->load->database();
-                	$this->load->model('users_db');
+               	$this->load->database();
+               	$this->load->model('users_db');
 
-			$form_data = array( 'user_name' => $this->session->userdata('user_name') );
-                        $row = $this->users_db->Get_id($form_data);
+		$form_data = array();
 
-                        $form_data = array('follows.user_id' => $row->id);
-
-                	$data['users'] = $this->users_db->get_list($form_data);
-
-                	$this->load->view('user_list', $data);
+		if (defined($this->session->userdata('user_name'))) {
+                        $form_data = array('follows.user_id' => $this->session->userdata('user_name'));
+		} else {
+			$form_data = array('follows.user_id' => -1);
 		}
-		else {
-			$this->form_validation->set_rules('user_name', 'User Name', 'required|xss_clean|max_length[30]');
-                        $this->form_validation->set_rules('email_address', 'Email Address', 'required|xss_clean|valid_email|max_length[255]');
-                        $this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
 
-			$this->load->view('no_permission');
-		}
+                $data['users'] = $this->users_db->get_list($form_data);
+
+                $this->load->view('user_list', $data);
 
 		$this->load->view('footer');
 	}

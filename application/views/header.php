@@ -32,7 +32,9 @@
 			<div class="nav-collapse">
 				<ul class="nav">
 					<li><a href="/">Home</a></li>
-					<li><a href="/wall">Wall</a></li>
+					<?php if($this->session->userdata('user_name')) { ?>
+					<li><a href="/wall">Public</a></li>
+					<?php } ?>
 					<li><a href="/lists">User List</a></li>
 					 <?php if($this->session->userdata('user_name')) { ?>
                                         <li class="dropdown">
@@ -51,9 +53,6 @@
 					</li>
 					<?php } ?>
 				</ul>
-				<form class="navbar-search pull-left" action="">
-					<input type="text" class="search-query span2" placeholder="Search">
-				</form>
 				<ul class="nav pull-right">
 				<?php if(!$this->session->userdata('user_name')) { ?>
 					<li><a href="/users/signin">Signin</a></li>
@@ -63,6 +62,9 @@
 					<li><a href="/users/logout">Logout</a></li>
 				<?php } ?>
 				</ul>
+				<form class="navbar-search pull-right" action="/search/tag" method="post" accept-charset="utf-8" >
+                                        <input type="text" class="search-query span2" placeholder="Search">
+                                </form>
 			</div>
 		</div>
 	</div>

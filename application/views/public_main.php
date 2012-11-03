@@ -50,7 +50,7 @@ endforeach;
 <style type="text/css">
       #wordcloud {
         margin: 30px auto;
-        width: 300px;
+        width: 200px;
         height: 100px;
         border: none;
       }
