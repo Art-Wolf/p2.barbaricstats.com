@@ -14,6 +14,34 @@ class Posts_db extends CI_Model {
 		}
 	}
 
+	function Search($form_data) {
+		$this->db->select('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp, COUNT(k1.post_id) karma_up, COUNT(k2.post_id) karma_down');
+                $this->db->from('posts');
+                $this->db->join('users', 'posts.user_id = users.id');
+                $this->db->join('karma k1', "posts.id = k1.post_id AND k1.karma_ind = 'U'", 'left outer');
+                $this->db->join('karma k2', "posts.id = k2.post_id AND k2.karma_ind = 'D'", 'left outer');
+
+		$terms = explode(' ', $form_data['term']);
+
+		$where = "";
+
+		foreach($terms as $key => $value) {
+
+			if (empty($where)) {
+				$where = "posts.message LIKE '%" . $value . "%' ";
+			} else {
+                		$where .= "OR posts.message LIKE '%" . $value . "%' ";
+			}
+		}
+		
+		$this->db->where($where);
+
+                $this->db->group_by('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp');
+                $this->db->order_by('posts.id ASC');
+
+                return $this->db->get()->result();
+	}
+
 	function Get_posts() {
 		$this->db->select('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp, COUNT(k1.post_id) karma_up, COUNT(k2.post_id) karma_down');
                 $this->db->from('posts');

@@ -62,8 +62,8 @@
 					<li><a href="/users/logout">Logout</a></li>
 				<?php } ?>
 				</ul>
-				<form class="navbar-search pull-right" action="/search/tag" method="post" accept-charset="utf-8" >
-                                        <input type="text" class="search-query span2" placeholder="Search">
+				<form class="navbar-search pull-right" action="/search" method="post" accept-charset="utf-8" >
+                                        <input id="search" name="search" type="text" class="search-query span2" placeholder="Search">
                                 </form>
 			</div>
 		</div>
