@@ -104,13 +104,13 @@ foreach ($posts as $msg) :
                                 if ($this->session->userdata('user_name') == $msg->user_name) {
                         ?>
                         <span>
-                                <a href="/posts/edit/<?php echo $msg->id; ?>"><i class="icon-edit"></i></a>
-                                <a href="/posts/delete/<?php echo $msg->id; ?>"><i class="icon-trash"></i></a>
+                                <a href="/posts/edit/<?php echo $msg->id; ?>" class="btn btn-mini btn-warning"><i class="icon-edit"></i></a>
+                                <a href="/posts/delete/<?php echo $msg->id; ?>" class="btn btn-mini btn-warning"><i class="icon-trash"></i></a>
                         </span>
                         <?php } else { ?>
                         <span>
-                                <a href="/karma/up/<?php echo $msg->id; ?>"><i class="icon-thumbs-up"></i></a>
-                                <a href="/karma/down/<?php echo $msg->id; ?>"><i class="icon-thumbs-down"></i></a>
+                                <a href="/karma/up/<?php echo $msg->id; ?>" class="btn btn-mini btn-success"><i class="icon-thumbs-up">5</i></a>
+                                <a href="/karma/down/<?php echo $msg->id; ?>" class="btn btn-mini btn-danger"><i class="icon-thumbs-down">1</i></a>
                         </span>
 			<?php } } ?>
 		</div>

@@ -18,6 +18,7 @@ class Posts_db extends CI_Model {
 		$this->db->select('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp');
                 $this->db->from('posts');
                 $this->db->join('users', 'posts.user_id = users.id');
+		$this->db->order_by('posts.id ASC');
 
 		return $this->db->get()->result();
 	}
