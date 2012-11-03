@@ -32,44 +32,69 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('user_name', 'User Name', 'required|xss_clean|max_length[30]');
                 $this->form_validation->set_rules('email_address', 'Email Address', 'required|xss_clean|valid_email|max_length[255]');
                 $this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
+		$this->form_validation->set_rules('location', 'Location', 'required|xss_clean|max_length[255]');
+                $this->form_validation->set_rules('website', 'Home Page', 'required|xss_clean|max_length[255]');
+                $this->form_validation->set_rules('bio', 'Bio', 'required|xss_clean|max_length[255]');
 
                 if ($this->form_validation->run() == FALSE) {
 			$this->load->view('register_form');
                 } else {
-                        $this->load->database();
-                        $this->load->model('users_db');
+			$config['upload_path'] = './img/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+	
+			$this->load->library('upload', $config);
 
-                        $form_data = array(
+			if ( ! $this->upload->do_upload("photo"))
+			{
+				echo "error: " . $this->upload->display_errors();
+				$this->load->view('post_error');
+			}
+			else
+			{
+	                        $this->load->database();
+	                        $this->load->model('users_db');
+
+				$uploaded_info = $this->upload->data();
+
+	                        $form_data = array(
                                                   'user_name' => set_value('user_name'),
                                                   'email_address' => set_value('email_address'),
-                                                  'password' => set_value('password')
+                                                  'password' => set_value('password'),
+						  'location' => set_value('location'),
+						  'website' => set_value('website'),
+                                                  'bio' => set_value('bio'),
+                                                  'photo' => $uploaded_info['file_name']
                                                    );
 
-                        if ($this->users_db->Register($form_data) == TRUE) {
-                        	$this->session->set_userdata('user_name', set_value('user_name'));
-				$form_data = array( 'user_name' => $this->session->userdata('user_name') );
-                                $row = $this->users_db->Get_id($form_data);
+        	                if ($this->users_db->Register($form_data) == TRUE) {
+        	                	$this->session->set_userdata('user_name', set_value('user_name'));
+					$form_data = array( 'user_name' => $this->session->userdata('user_name') );
+        	                        $row = $this->users_db->Get_id($form_data);
 
-                                $this->session->set_userdata('user_id', $row->id);
+        	                        $this->session->set_userdata('user_id', $row->id);
 
-                                $this->load->library('email');
+        	                        $this->load->library('email');
 
-                                $this->email->from('admin@barbaricstats.com', 'Admin');
-                                $this->email->to(set_value('email_address'));
+        	                        $this->email->from('admin@barbaricstats.com', 'Admin');
+        	                        $this->email->to(set_value('email_address'));
 
-                                $this->email->subject('Barbaric Stats - Registrtaion');
-
-                                $email_message = "Thank you for registering with barbaricstats.com.\n";
-                                $email_message .= "Please verify your account by clicking:\n";
-                                $email_message .= "\t\thttp://barbaricstats.com";
-
-                                $this->email->message($email_message);
-
-                                $this->email->send();
-                                $this->load->view('register_success');
-                        } else {
-				$this->load->view('post_error.php');
-                        }
+        	                        $this->email->subject('Barbaric Stats - Registrtaion');
+	
+	                                $email_message = "Thank you for registering with barbaricstats.com.\n";
+	                                $email_message .= "Please verify your account by clicking:\n";
+	                                $email_message .= "\t\thttp://barbaricstats.com";
+	
+	                                $this->email->message($email_message);
+	
+        	                        $this->email->send();
+        	                        $this->load->view('register_success');
+        	                } else {
+					$this->load->view('post_error.php');
+        	                }
+			}
 		}
 
 		$this->load->view('footer');
@@ -157,6 +182,9 @@ class Users extends CI_Controller {
                 $form_data = array('follows.user_id' => $user_id);
                 $data['follows'] = $this->users_db->get_following_list($form_data);
 
+		$form_data = array('users.id' => $this->session->userdata('user_id'));
+		$data['profile'] = $this->users_db->get_profile($form_data);
+
                 $this->load->view('user_follows', $data);
 		$this->load->view('user_profile', $data);
 		$this->load->view('user_posts', $data);
@@ -202,18 +230,11 @@ class Users extends CI_Controller {
                 	 
 			$this->load->model('users_db');
 
-			$form_data = array( 'user_name' => $this->session->userdata('user_name') );
-			$row = $this->users_db->Get_id($form_data);
-
-                	$form_data = array('user_id' => $row->id, 'followed_id' => $user_id);
+                	$form_data = array('user_id' => $this->session->userdata('user_id'), 'followed_id' => $user_id);
 
 			$this->users_db->start_following($form_data);
 
-			$form_data = array('follows.user_id' => $row->id);
-
-                	$data['follows'] = $this->users_db->get_following_list($form_data);
-
-	                $this->load->view('user_follows', $data);
+			redirect(site_url($this->session->userdata('previous_page')));
 		}
 
                 $this->load->view('footer');

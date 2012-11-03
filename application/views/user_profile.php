@@ -8,17 +8,17 @@ $attributes = array('class' => '', 'id' => '');
 
 <div class="container span12">
         <div class="span1">
-                <div class="pagination-centered"><img src="/img/user.png" width="60px" class="img-rounded"></div>
+                <div class="pagination-centered"><img src="/img/<?php if (is_null($profile->photo)) { ?> user.png <?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
         </div>
 
         <div class="span5">
                 <dl class="dl-horizontal">
                         <dt>User Name</dt>
-                        <dd>TBD</dd>
+                        <dd><?php echo $profile->user_name; ?></dd>
                         <dt>Location</dt>
-                        <dd>TBD</db>
+                        <dd><?php echo $profile->location; ?></db>
                         <dt>Home Page</dt>
-                        <dd>TBD</dd>
+                        <dd><?php echo $profile->website; ?></dd>
                         <dt>Messages</dt>
                         <dd><?php echo count($posts); ?></dd>
                         <dt>Followers</dt>
@@ -27,8 +27,8 @@ $attributes = array('class' => '', 'id' => '');
                         <dd>TBD</dd>
                         <dt>Last Login</dt>
                         <dd>TBD</dd>
-                        <dt>Message to the World!</dt>
-                        <dd>Something or other...</dd>
+                        <dt>Bio</dt>
+                        <dd><?php echo $profile->bio; ?></dd>
                 </dl>
         </div>
 </div>

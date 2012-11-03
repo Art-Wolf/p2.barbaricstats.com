@@ -77,5 +77,11 @@ class Users_db extends CI_Model {
 
                 return $this->db->get()->result();
 	}
+
+	function Get_profile($form_data) {
+		$this->db->where($form_data);
+
+		return $this->db->get('users')->row();
+	}
 }
 ?>

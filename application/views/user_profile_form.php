@@ -4,10 +4,11 @@ $attributes = array('class' => '', 'id' => '');
 
 ?>
 
+<h1>Profile</h1>
+
+<div class="container span12">
 <?php echo form_open_multipart('users/register', $attributes); ?>
 
-	<legend>Register</legend>
-	
 	<label>User Name</label>
 	<input id="user_name" type="text" name="user_name" maxlength="30" value="<?php echo set_value('user_name'); ?>"  />
 	<?php echo form_error('user_name'); ?>
@@ -20,6 +21,10 @@ $attributes = array('class' => '', 'id' => '');
 	<input id="password" type="password" name="password" maxlength="255" value="<?php echo set_value('password'); ?>"  />
 	<?php echo form_error('password'); ?>
 
+	<label>Location</label>
+        <input id="location" type="text" name="location" maxlength="255" value="<?php echo set_value('location'); ?>"  />
+        <?php echo form_error('location'); ?>
+
 	<label>Home Page</label>
         <input id="website" type="text" name="website" maxlength="255" value="<?php echo set_value('website'); ?>"  />
         <?php echo form_error('website'); ?>
@@ -29,6 +34,7 @@ $attributes = array('class' => '', 'id' => '');
         <?php echo form_error('bio'); ?>
 
 	<label>Photo</label>
+	<img src="/img/<?php echo set_value('photo') ?>" class="img-rounded pull-left">
 	<input type="file" id="photo" name="photo" size="20" />
         <?php echo form_error('photo'); ?>
 
