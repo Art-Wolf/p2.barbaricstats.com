@@ -100,13 +100,7 @@ class Users extends CI_Controller {
                         	$row = $this->users_db->Get_id($form_data);
 				$this->session->set_userdata('user_id', $row->id);
 
-				$this->load->view('header');
-				$this->load->view('signin_success');
-
-				$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
-                                $data['posts'] = $this->posts_db->get_followed_posts($form_data);
-
-				$this->load->view('user_main', $data);
+				redirect('/');	
 			} else {
 				$this->load->view('header');
 				$this->load->view('signin_failure');
