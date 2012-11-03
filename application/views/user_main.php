@@ -109,8 +109,8 @@ foreach ($posts as $msg) :
                         </span>
                         <?php } else { ?>
                         <span>
-                                <a href="/karma/up/<?php echo $msg->id; ?>" class="btn btn-mini btn-success"><i class="icon-thumbs-up">5</i></a>
-                                <a href="/karma/down/<?php echo $msg->id; ?>" class="btn btn-mini btn-danger"><i class="icon-thumbs-down">1</i></a>
+                                <a href="/karma/up/<?php echo $msg->id; ?>" class="btn btn-mini btn-success"><i class="icon-thumbs-up"><?php if ($msg->karma_up > 0) { echo $msg->karma_up;} ?></i></a>
+                                <a href="/karma/down/<?php echo $msg->id; ?>" class="btn btn-mini btn-danger"><i class="icon-thumbs-down"><?php if ($msg->karma_down > 0) { echo $msg->karma_down;} ?></i></a>
                         </span>
 			<?php } } ?>
 		</div>

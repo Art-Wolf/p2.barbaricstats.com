@@ -23,13 +23,14 @@ class Karma extends CI_Controller {
 				$this->load->model('karma_db');
                                 $form_data = array( 
 					'karma.user_id'  => $this->session->userdata('user_id'), 
-					'karma.post_id' => $post_id,
-					'karma.karma' => 'U' );
-                                $data['post'] = $this->karma_db->Up_karma($form_data);
+					'karma.post_id' => $post_id);
 
-                		$data['posts'] = $this->posts_db->get_posts();
-
-                                $this->load->view('user_main', $data);
+                                if($this->karma_db->Up_karma($form_data) == TRUE) {
+                			$data['posts'] = $this->posts_db->get_posts();
+                                	$this->load->view('user_main', $data);
+				} else {
+					$this->load->view('karma_error');
+				}
                         } else {
                         	$this->load->view('karma_no_permission');
 			} 
@@ -55,13 +56,15 @@ class Karma extends CI_Controller {
                                 $this->load->model('karma_db');
                                 $form_data = array(
                                         'karma.user_id'  => $this->session->userdata('user_id'),
-                                        'karma.post_id' => $post_id,
-                                        'karma.karma' => 'D' );
-                                $data['post'] = $this->karma_db->Down_karma($form_data);
+                                        'karma.post_id' => $post_id);
 
-                                $data['posts'] = $this->posts_db->get_posts();
+                                if($this->karma_db->Down_karma($form_data) == TRUE) {
 
-                                $this->load->view('user_main', $data);
+                                	$data['posts'] = $this->posts_db->get_posts();
+                                	$this->load->view('user_main', $data);
+				} else {
+					$this->load->view('karma_error');
+				}
                         } else {
                                 $this->load->view('karma_no_permission');
                         }

@@ -15,9 +15,12 @@ class Posts_db extends CI_Model {
 	}
 
 	function Get_posts() {
-		$this->db->select('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp');
+		$this->db->select('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp, COUNT(k1.post_id) karma_up, COUNT(k2.post_id) karma_down');
                 $this->db->from('posts');
                 $this->db->join('users', 'posts.user_id = users.id');
+		$this->db->join('karma k1', "posts.id = k1.post_id AND k1.karma_ind = 'U'", 'left outer');
+		$this->db->join('karma k2', "posts.id = k2.post_id AND k2.karma_ind = 'D'", 'left outer');
+		$this->db->group_by('posts.id, posts.user_id, users.user_name, posts.message, posts.insert_tmstmp');
 		$this->db->order_by('posts.id ASC');
 
 		return $this->db->get()->result();
