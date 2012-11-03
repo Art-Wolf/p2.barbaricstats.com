@@ -8,7 +8,7 @@ $attributes = array('class' => '', 'id' => '');
 
 <div class="container span12">
         <div class="span1">
-                <div class="pagination-centered"><img src="/img/<?php if (is_null($profile->photo)) { ?>user.png<?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
+                <div class="pagination-centered"><img src="/img/<?php if (empty($profile->photo)) { ?>user.png<?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
         </div>
 
         <div class="span5">
