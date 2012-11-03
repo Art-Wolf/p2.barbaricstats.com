@@ -26,7 +26,9 @@ class Karma extends CI_Controller {
 					'karma.post_id' => $post_id);
 
                                 if($this->karma_db->Up_karma($form_data) == TRUE) {
-                			$data['posts'] = $this->posts_db->get_posts();
+					$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
+                                        $data['posts'] = $this->posts_db->get_followed_posts($form_data);
+
                                 	$this->load->view('user_main', $data);
 				} else {
 					$this->load->view('karma_error');
@@ -59,8 +61,8 @@ class Karma extends CI_Controller {
                                         'karma.post_id' => $post_id);
 
                                 if($this->karma_db->Down_karma($form_data) == TRUE) {
-
-                                	$data['posts'] = $this->posts_db->get_posts();
+					$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
+                                	$data['posts'] = $this->posts_db->get_followed_posts($form_data);
                                 	$this->load->view('user_main', $data);
 				} else {
 					$this->load->view('karma_error');

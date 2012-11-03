@@ -48,6 +48,40 @@ class Posts extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	function history()
+        {
+                $this->load->helper(array('form','url'));
+                $this->load->library('form_validation');
+
+                $this->load->view('header');
+
+                if ($this->session->userdata('user_name')) {
+
+                	$this->load->view('post_form');
+
+				
+                        $this->load->database();
+                        $this->load->model('posts_db');
+
+                        $form_data = array(
+                        	'users.id' => $this->session->userdata('user_id')
+                        );
+
+                        $data['posts'] = $this->posts_db->Get_user_posts($form_data);
+
+                        $this->load->view('user_posts', $data);
+                }
+                else {
+                        $this->form_validation->set_rules('user_name', 'User Name', 'required|xss_clean|max_length[30]');
+                        $this->form_validation->set_rules('email_address', 'Email Address', 'required|xss_clean|valid_email|max_length[255]');
+                        $this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
+
+                        $this->load->view('no_permission');
+                }
+
+                $this->load->view('footer');
+        }
+
 	function edit($post_id) {
                 $this->load->helper(array('form','url'));
                 $this->load->library('form_validation');

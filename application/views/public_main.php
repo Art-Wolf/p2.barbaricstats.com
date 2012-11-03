@@ -99,6 +99,10 @@ foreach ($posts as $msg) :
 	<section>
 		<div class="my-well">
 			<h3><a href="/users/display/<?php echo $msg->user_id; ?>"><?php echo $msg->user_name; ?></a></h3>
+			<span>
+                                <button class="btn btn-mini btn-success"><i class="icon-thumbs-up"><?php if ($msg->karma_up > 0) { echo $msg->karma_up;} ?></i></a>
+                                <button class="btn btn-mini btn-danger"><i class="icon-thumbs-down"><?php if ($msg->karma_down > 0) { echo $msg->karma_down;} ?></i></a>
+                        </span>
 		</div>
 	</section>
 	<section>

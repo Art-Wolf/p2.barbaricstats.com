@@ -75,8 +75,6 @@ class Users extends CI_Controller {
                 $this->load->database();
                 $this->load->model('posts_db');
 
-                $data['posts'] = $this->posts_db->get_posts();
-
 		if ($this->form_validation->run() == TRUE) {
                         $this->load->model('users_db');
 
@@ -94,11 +92,16 @@ class Users extends CI_Controller {
 
 				$this->load->view('header');
 				$this->load->view('signin_success');
+
+				$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
+                                $data['posts'] = $this->posts_db->get_followed_posts($form_data);
+
 				$this->load->view('user_main', $data);
 			} else {
 				$this->load->view('header');
 				$this->load->view('signin_failure');
-				$this->load->view('public_main', $data);
+
+				$this->load->view('signin_form');
 			}
 		} else {
 			$this->load->view('header');
@@ -118,12 +121,14 @@ class Users extends CI_Controller {
 		$this->load->database();
                 $this->load->model('posts_db');
 
-                $data['posts'] = $this->posts_db->get_posts();
-
 		if ($this->session->userdata('user_name')) {
+			$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
+                        $data['posts'] = $this->posts_db->get_followed_posts($form_data);
+
                         $this->load->view('user_main', $data);
 		}
 		else {
+			$data['posts'] = $this->posts_db->get_posts();
                         $this->load->view('public_main', $data);
 		}
 
@@ -139,7 +144,7 @@ class Users extends CI_Controller {
                 $this->load->database();
                 $this->load->model('posts_db');
 
-		$form_data = array('user_id' => $user_id);
+		$form_data = array('users.id' => $user_id);
 
                 $data['posts'] = $this->posts_db->get_user_posts($form_data);
 
@@ -149,7 +154,7 @@ class Users extends CI_Controller {
                 $data['follows'] = $this->users_db->get_following_list($form_data);
 
                 $this->load->view('user_follows', $data);
-
+		$this->load->view('user_profile', $data);
 		$this->load->view('user_posts', $data);
                 $this->load->view('footer');
 	}

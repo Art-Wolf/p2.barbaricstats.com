@@ -7,6 +7,8 @@ $attributes = array('class' => '', 'id' => '');
 	<div class="nav-panel">
 		<h1>Word Cloud</h1>
 		<div class="span3" id="wordcloud"></div>
+
+<?php if (count($posts) > 0) { ?>
 <script type="text/javascript">
 var word_list = new Array(
 <?php
@@ -78,6 +80,16 @@ endforeach;
         text-shadow: 0px 1px 1px #fff;
       }
     </style>
+<?php } else { ?>
+
+	<div class="my-well">
+	<br/>
+	<p>No posts = No words</p>
+	<p>No words = No cloud</p>
+	<p>No cloud = sad face :(</p>
+	</div>
+
+<?php } ?>
 	</div>
 </div>
 
@@ -85,9 +97,24 @@ endforeach;
 </div>
 
 <div class="container span7">
-	<h1>Latest Public Posts</h1>
+	<h1>Followed Users Posts</h1>
 
-<?php
+<?php if (count($posts) < 1) { ?> 
+
+<div class="well" style="background-color: rgb(245, 245, 245); ">
+        <section>
+                <div class="my-well">
+                        <h3>No Followed Users</h3>
+                </div>
+        </section>
+        <section>
+                <div class="modal-header">
+                        <p>Welcome to a pretty barbaric chat! To begin you should look up some users to follow - check out the <a href="/lists">User List</a> or check out the latest <a href="/wall">public posts</a>.</p>
+                </div>
+        </section>
+</div>
+
+<?php } else {
 
 $posts = array_reverse($posts);
 
@@ -131,5 +158,6 @@ foreach ($posts as $msg) :
 
 endforeach;
 
+}
 ?>
 </div>

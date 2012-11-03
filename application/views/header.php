@@ -32,8 +32,8 @@
 			<div class="nav-collapse">
 				<ul class="nav">
 					<li><a href="/">Home</a></li>
+					<li><a href="/wall">Wall</a></li>
 					<li><a href="/lists">User List</a></li>
-					<li><a href="#">Link</a></li>
 					 <?php if($this->session->userdata('user_name')) { ?>
                                         <li class="dropdown">
                                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Post <b class="caret"></b></a>
