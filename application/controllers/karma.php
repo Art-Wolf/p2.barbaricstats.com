@@ -2,6 +2,18 @@
 
 class Karma extends CI_Controller {
 
+	public function __construct() {
+		parent::__construct();
+
+		if (is_null($this->session->userdata('current_page'))) {
+                        $this->session->set_userdata('previous_page', 'public_main');
+                } else {
+                        $this->session->set_userdata('previous_page', $this->session->userdata('current_page'));
+                }
+
+		$this->session->set_userdata('current_page', substr($_SERVER['REQUEST_URI'],1));
+	}
+
 	function index()
 	{			
 	}
@@ -26,10 +38,7 @@ class Karma extends CI_Controller {
 					'karma.post_id' => $post_id);
 
                                 if($this->karma_db->Up_karma($form_data) == TRUE) {
-					$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
-                                        $data['posts'] = $this->posts_db->get_followed_posts($form_data);
-
-                                	$this->load->view('user_main', $data);
+					redirect(site_url($this->session->userdata('previous_page')));
 				} else {
 					$this->load->view('karma_error');
 				}
@@ -61,9 +70,7 @@ class Karma extends CI_Controller {
                                         'karma.post_id' => $post_id);
 
                                 if($this->karma_db->Down_karma($form_data) == TRUE) {
-					$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
-                                	$data['posts'] = $this->posts_db->get_followed_posts($form_data);
-                                	$this->load->view('user_main', $data);
+					redirect(site_url($this->session->userdata('previous_page')));
 				} else {
 					$this->load->view('karma_error');
 				}

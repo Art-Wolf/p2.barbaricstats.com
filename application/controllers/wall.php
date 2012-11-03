@@ -1,6 +1,17 @@
 <?php
 
 class Wall extends CI_Controller {
+	public function __construct() {
+                parent::__construct();
+
+		if (is_null($this->session->userdata('current_page'))) {
+			$this->session->set_userdata('previous_page', 'public_main');
+		} else {
+                	$this->session->set_userdata('previous_page', $this->session->userdata('current_page'));
+                }
+
+		$this->session->set_userdata('current_page', substr($_SERVER['REQUEST_URI'],1));
+        }
 
 	function index()
 	{			
