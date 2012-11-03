@@ -30,6 +30,16 @@ class Users_db extends CI_Model {
                 return FALSE;
 	}
 
+	function Log_login($form_data) {
+		$this->db->insert('logins', $form_data);
+
+		if ($this->db->affected_rows() == '1') {
+                        return TRUE;
+                }
+
+                return FALSE;
+	}
+
 	function Get_list($form_data) {
 		$this->db->select('users.id, users.user_name, follows.followed_id');
                 $this->db->from('users');
@@ -79,7 +89,11 @@ class Users_db extends CI_Model {
 	}
 
 	function Get_profile($form_data) {
+		$this->db->select('users.id, users.user_name, users.website, users.bio, users.photo, users.location, COUNT(f2.followed_id) followed_count, MAX(login_timestamp) last_login');
+		$this->db->join('follows f2', 'f2.followed_id = users.id', 'left outer');
+		$this->db->join('logins', 'logins.user_id = users.id', 'left outer');
 		$this->db->where($form_data);
+		$this->db->group_by('users.id, users.user_name, users.website, users.bio, users.photo, users.location');
 
 		return $this->db->get('users')->row();
 	}

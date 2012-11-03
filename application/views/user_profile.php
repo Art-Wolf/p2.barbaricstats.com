@@ -8,28 +8,44 @@ $attributes = array('class' => '', 'id' => '');
 
 <div class="container span12">
         <div class="span1">
-                <div class="pagination-centered"><img src="/img/<?php if (is_null($profile->photo)) { ?> user.png <?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
+                <div class="pagination-centered"><img src="/img/<?php if (is_null($profile->photo)) { ?>user.png<?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
         </div>
 
         <div class="span5">
-                <dl class="dl-horizontal">
-                        <dt>User Name</dt>
-                        <dd><?php echo $profile->user_name; ?></dd>
-                        <dt>Location</dt>
-                        <dd><?php echo $profile->location; ?></db>
-                        <dt>Home Page</dt>
-                        <dd><?php echo $profile->website; ?></dd>
-                        <dt>Messages</dt>
-                        <dd><?php echo count($posts); ?></dd>
-                        <dt>Followers</dt>
-                        <dd>TBD</dd>
-                        <dt>Follows</dt>
-                        <dd>TBD</dd>
-                        <dt>Last Login</dt>
-                        <dd>TBD</dd>
-                        <dt>Bio</dt>
-                        <dd><?php echo $profile->bio; ?></dd>
-                </dl>
+		<table class="table table-striped">
+                        <tr>
+				<td>User Name</td>
+                        	<td><?php echo $profile->user_name; ?></td>
+			</tr>
+			<tr>
+				<td>Location</td>
+				<td><?php echo $profile->location; ?></td>
+			</tr>
+			<tr>
+				<td>Home Page</td>
+				<td><?php echo $profile->website; ?></td>
+			</tr>
+                        <tr>
+				<td>Messages</td>
+                        	<td><?php echo count($posts); ?></td>
+			</tr>
+                        <tr>
+				<td>Followers</td>
+                        	<td><?php echo $profile->followed_count; ?></td>
+			</tr>
+			<tr>
+                        	<td>Follows</td>
+                        	<td><?php echo count($follows); ?></td>
+			</tr>
+			<tr>
+                        	<td>Last Login</td>
+                        	<td><?php echo date('F d, Y h:mA', strtotime($profile->last_login)); ?></td>
+			</tr>
+			<tr>
+                        	<td>Bio</td>
+                        	<td><?php echo $profile->bio; ?></td>
+			</tr>
+                </table>
         </div>
 </div>
 

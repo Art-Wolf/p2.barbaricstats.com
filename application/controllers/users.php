@@ -125,6 +125,10 @@ class Users extends CI_Controller {
                         	$row = $this->users_db->Get_id($form_data);
 				$this->session->set_userdata('user_id', $row->id);
 
+				$form_data = array(
+					'user_id' => $row->id);
+			
+				$this->users_db->Log_login($form_data);
 				redirect('/');	
 			} else {
 				$this->load->view('header');
@@ -182,7 +186,7 @@ class Users extends CI_Controller {
                 $form_data = array('follows.user_id' => $user_id);
                 $data['follows'] = $this->users_db->get_following_list($form_data);
 
-		$form_data = array('users.id' => $this->session->userdata('user_id'));
+		$form_data = array('users.id' => $user_id);
 		$data['profile'] = $this->users_db->get_profile($form_data);
 
                 $this->load->view('user_follows', $data);
