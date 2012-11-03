@@ -8,7 +8,7 @@ $attributes = array('class' => '', 'id' => '');
 
 <div class="container span12">
         <div class="span1">
-                <div class="pagination-centered"><img src="/img/<?php if (is_null($profile->photo)) { ?>user.png<?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
+                <div class="pagination-centered"><img src="/img/<?php if ($profile->photo) { ?>user.png<?php } else { echo $profile->photo; } ?>" width="60px" class="img-rounded"></div>
         </div>
 
         <div class="span5">
@@ -39,7 +39,7 @@ $attributes = array('class' => '', 'id' => '');
 			</tr>
 			<tr>
                         	<td>Last Login</td>
-                        	<td><?php echo date('F d, Y h:mA', strtotime($profile->last_login)); ?></td>
+                        	<td><?php if ($profile->last_login) {echo date('F d, Y h:mA', strtotime($profile->last_login));} ?></td>
 			</tr>
 			<tr>
                         	<td>Bio</td>
