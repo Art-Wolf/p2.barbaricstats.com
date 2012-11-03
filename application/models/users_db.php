@@ -33,7 +33,7 @@ class Users_db extends CI_Model {
 	function Get_list($form_data) {
 		$this->db->select('users.id, users.user_name, follows.followed_id');
                 $this->db->from('users');
-                $this->db->join('follows', 'follows.followed_id = users.id AND ' . implode(' AND ',$form_data), 'left outer');
+                $this->db->join('follows', 'follows.followed_id = users.id AND follows.user_id = ' . $form_data['follows.user_id'], 'left outer');
 		$this->db->where('users.id <> ' . $form_data['follows.user_id']);
 
                 return $this->db->get()->result();

@@ -26,8 +26,8 @@ class Lists extends CI_Controller {
 
 		$form_data = array();
 
-		if (defined($this->session->userdata('user_name'))) {
-                        $form_data = array('follows.user_id' => $this->session->userdata('user_name'));
+		if ($this->session->userdata('user_id')) {
+                        $form_data = array('follows.user_id' => $this->session->userdata('user_id'));
 		} else {
 			$form_data = array('follows.user_id' => -1);
 		}
