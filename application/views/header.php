@@ -204,37 +204,37 @@ echo `$execute_string`;
                 name: 'User Post',
                 data: [
 <?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>]
@@ -242,37 +242,37 @@ echo `$execute_string`;
                 name: 'User Karma',
                 data: [
 <?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/posts' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/posts' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>
 ,<?php
-$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}'  | wc -l";
 
 echo `$execute_string`;
 ?>]
