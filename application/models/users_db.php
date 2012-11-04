@@ -89,7 +89,7 @@ class Users_db extends CI_Model {
 	}
 
 	function Get_profile($form_data) {
-		$this->db->select('users.id, users.user_name, users.website, users.bio, users.photo, users.location, COUNT(f2.followed_id) followed_count, MAX(login_timestamp) last_login');
+		$this->db->select('users.id, users.user_name, users.email_address, users.website, users.bio, users.photo, users.location, COUNT(f2.followed_id) followed_count, MAX(login_timestamp) last_login');
 		$this->db->join('follows f2', 'f2.followed_id = users.id', 'left outer');
 		$this->db->join('logins', 'logins.user_id = users.id', 'left outer');
 		$this->db->where($form_data);
