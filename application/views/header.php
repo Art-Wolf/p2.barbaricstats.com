@@ -97,7 +97,7 @@ $(function () {
                 x: -20
             },
             xAxis: {
-                categories: [<?php echo date('D', strtotime ( '-5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-1 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-2 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-3 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-4 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-5 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-6 day -5 hour', time())); ?>]
+                categories: ['<?php echo date('D', strtotime ( '-5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-1 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-2 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-3 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-4 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-5 day -5 hour', time())); ?>', '<?php echo date('D', strtotime ( '-6 day -5 hour', time())); ?>']
             },
             yAxis: {
                 title: {
@@ -164,13 +164,118 @@ echo `$execute_string`;
 ]
             }, {
                 name: 'User Login',
-                data: [0, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8]
+                data: [
+<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'POST /users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'POST /users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'POST /users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'POST /users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'POST /users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'POST /users/signin' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>]
             }, {
                 name: 'User Post',
-                data: [0, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6]
+                data: [
+<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'POST /posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>]
             }, {
                 name: 'User Karma',
-                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0]
+                data: [
+<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-1 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-2 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-3 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-4 day -5 hour', time())) . "' |grep 'POST/posts' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-5 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>
+,<?php
+$execute_string = "cat /home/artwolf/barbaricstatslogs/access.log  | grep '\[" . date('d/M/Y', strtotime ( '-6 day -5 hour', time())) . "' |grep 'GET /karma/' |awk '{print $1}' | sort | uniq | wc -l";
+
+echo `$execute_string`;
+?>]
             }]
         });
     });
