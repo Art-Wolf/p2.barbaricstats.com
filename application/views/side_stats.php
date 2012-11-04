@@ -20,20 +20,23 @@ foreach($karma as $daily_karma) {
                         $column_up = "0,";
                 } else {
                         $column_up .= "0";
+			if ($day_index < 7) {
+                                $column_up .= ",";
+                        }
                 }
 
                 if (empty($column_down)) {
                         $column_down = "0,";
                 } else {
                         $column_down .= "0";
+			if ($day_index < 7) {
+                        	$column_down .= ",";
+			}
                 }
 
                 $day_index++;
 
-                if ($day_index < 7) {
-                        $column_up .= ",";
-                        $column_down .= ",";
-                } else {
+                if ($day_index > 7) {
                         break;
                 }
         }
