@@ -48,5 +48,11 @@ class Karma_db extends CI_Model {
 
                 return FALSE;
 	}
+
+	function Weekly_stats() {
+		$query = "SELECT DATE_FORMAT(karma.timestamp, '%W') day, COUNT(*) total, COUNT(CASE WHEN karma_ind = 'U' THEN 1 END) up_count, COUNT(CASE WHEN karma_ind = 'D' THEN 1 END) down_count FROM karma WHERE karma.timestamp >= NOW() - INTERVAL 7 DAY GROUP BY DATE_FORMAT(karma.timestamp, '%W') ORDER BY timestamp DESC";
+
+		return $this->db->query($query)->result();
+	}
 }
 ?>

@@ -27,6 +27,9 @@ class Search extends CI_Controller {
 
                 $data['posts'] = $this->posts_db->search($form_data);
 
+		$this->load->model('karma_db');
+                $data['karma'] = $this->karma_db->weekly_stats();
+		$this->load->view('side_stats', $data);
                 $this->load->view('public_main', $data);
 
 		$this->load->view('footer');
@@ -53,6 +56,7 @@ class Search extends CI_Controller {
                         $data['posts'] = $this->posts_db->search($form_data);
 
 			if (count($data['posts']) > 0) {
+				$this->load->view('side_stats', $data);
                 		$this->load->view('public_main', $data);
 			} else {
 				$this->load->view('search_empty');

@@ -32,9 +32,9 @@ class Users extends CI_Controller {
 		$this->form_validation->set_rules('user_name', 'User Name', 'required|xss_clean|max_length[30]');
                 $this->form_validation->set_rules('email_address', 'Email Address', 'required|xss_clean|valid_email|max_length[255]');
                 $this->form_validation->set_rules('password', 'Password', 'required|max_length[255]|md5');
-		$this->form_validation->set_rules('location', 'Location', 'required|xss_clean|max_length[255]');
-                $this->form_validation->set_rules('website', 'Home Page', 'required|xss_clean|max_length[255]');
-                $this->form_validation->set_rules('bio', 'Bio', 'required|xss_clean|max_length[255]');
+		$this->form_validation->set_rules('location', 'Location', 'xss_clean|max_length[255]');
+                $this->form_validation->set_rules('website', 'Home Page', 'xss_clean|max_length[255]');
+                $this->form_validation->set_rules('bio', 'Bio', 'xss_clean|max_length[255]');
 
                 if ($this->form_validation->run() == FALSE) {
 			$this->load->view('register_form');
@@ -47,54 +47,47 @@ class Users extends CI_Controller {
 	
 			$this->load->library('upload', $config);
 
-			if ( ! $this->upload->do_upload("photo"))
-			{
-				echo "error: " . $this->upload->display_errors();
-				$this->load->view('post_error');
-			}
-			else
-			{
-	                        $this->load->database();
-	                        $this->load->model('users_db');
+			$this->upload->do_upload("photo");
+	                $this->load->database();
+	                $this->load->model('users_db');
 
-				$uploaded_info = $this->upload->data();
+			$uploaded_info = $this->upload->data();
 
-	                        $form_data = array(
-                                                  'user_name' => set_value('user_name'),
-                                                  'email_address' => set_value('email_address'),
-                                                  'password' => set_value('password'),
-						  'location' => set_value('location'),
-						  'website' => set_value('website'),
-                                                  'bio' => set_value('bio'),
-                                                  'photo' => $uploaded_info['file_name']
-                                                   );
+	                $form_data = array(
+                              	'user_name' => set_value('user_name'),
+                              	'email_address' => set_value('email_address'),
+                              	'password' => set_value('password'),
+				'location' => set_value('location'),
+				'website' => set_value('website'),
+                                'bio' => set_value('bio'),
+                                'photo' => $uploaded_info['file_name']
+                        );
 
-        	                if ($this->users_db->Register($form_data) == TRUE) {
-        	                	$this->session->set_userdata('user_name', set_value('user_name'));
-					$form_data = array( 'user_name' => $this->session->userdata('user_name') );
-        	                        $row = $this->users_db->Get_id($form_data);
+        	        if ($this->users_db->Register($form_data) == TRUE) {
+        	             	$this->session->set_userdata('user_name', set_value('user_name'));
+				$form_data = array( 'user_name' => $this->session->userdata('user_name') );
+        	                $row = $this->users_db->Get_id($form_data);
 
-        	                        $this->session->set_userdata('user_id', $row->id);
+        	                $this->session->set_userdata('user_id', $row->id);
 
-        	                        $this->load->library('email');
+        	                $this->load->library('email');
 
-        	                        $this->email->from('admin@barbaricstats.com', 'Admin');
-        	                        $this->email->to(set_value('email_address'));
+        	                $this->email->from('admin@barbaricstats.com', 'Admin');
+        	                $this->email->to(set_value('email_address'));
 
-        	                        $this->email->subject('Barbaric Stats - Registrtaion');
+        	                $this->email->subject('Barbaric Stats - Registrtaion');
 	
-	                                $email_message = "Thank you for registering with barbaricstats.com.\n";
-	                                $email_message .= "Please verify your account by clicking:\n";
-	                                $email_message .= "\t\thttp://barbaricstats.com";
+	                        $email_message = "Thank you for registering with barbaricstats.com.\n";
+	                        $email_message .= "Please verify your account by clicking:\n";
+	                        $email_message .= "\t\thttp://barbaricstats.com";
 	
-	                                $this->email->message($email_message);
+	                        $this->email->message($email_message);
 	
-        	                        $this->email->send();
-        	                        $this->load->view('register_success');
-        	                } else {
+        	               $this->email->send();
+        	               $this->load->view('register_success');
+        	        } else {
 					$this->load->view('post_error.php');
-        	                }
-			}
+        	        }
 		}
 
 		$this->load->view('footer');
@@ -158,10 +151,16 @@ class Users extends CI_Controller {
 			$form_data = array ( 'follows.user_id' => $this->session->userdata('user_id'));
                         $data['posts'] = $this->posts_db->get_followed_posts($form_data);
 
+			$this->load->model('karma_db');
+                	$data['karma'] = $this->karma_db->weekly_stats();
+			$this->load->view('side_stats', $data);
                         $this->load->view('user_main', $data);
 		}
 		else {
 			$data['posts'] = $this->posts_db->get_posts();
+			$this->load->model('karma_db');
+                	$data['karma'] = $this->karma_db->weekly_stats();
+			$this->load->view('side_stats', $data);
                         $this->load->view('public_main', $data);
 		}
 
