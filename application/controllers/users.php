@@ -258,18 +258,11 @@ class Users extends CI_Controller {
 
                         $this->load->model('users_db');
 
-                        $form_data = array( 'user_name' => $this->session->userdata('user_name') );
-                        $row = $this->users_db->Get_id($form_data);
-
-                        $form_data = array('user_id' => $row->id, 'followed_id' => $user_id);
+                        $form_data = array('user_id' => $this->session->userdata('user_id'), 'followed_id' => $user_id);
 
                         $this->users_db->stop_following($form_data);
 
-                        $form_data = array('follows.user_id' => $row->id);
-
-                        $data['follows'] = $this->users_db->get_following_list($form_data);
-
-                        $this->load->view('user_follows', $data);
+			redirect(site_url($this->session->userdata('previous_page')));
                 }
 
                 $this->load->view('footer');
